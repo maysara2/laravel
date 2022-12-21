@@ -1,7 +1,18 @@
 <?php
 
+use App\Http\Controllers\catcontroller;
+use App\Http\Controllers\cvcontroller;
+use App\Http\Controllers\ffcon;
+use App\Http\Controllers\form1controller;
+use App\Http\Controllers\ggcontroller;
+use App\Http\Controllers\GGnaser;
+use App\Http\Controllers\maysatacontroller;
+use App\Http\Controllers\page1controller;
+use App\Http\Controllers\postscontroller;
 use App\Http\Controllers\webController;
+use App\Models\Categoties;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\Environment\Runtime;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +30,8 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
-
-
-/* Route::get('/', function () {
+/*
+ Route::get('/', function () {
     return 'hello maysara';
 });
  */
@@ -93,7 +102,7 @@ Route:: get('contact-uuhhhhhh',function(){
  */
 
 
-Route::get("/",[webController::class,'index'])
+ Route::get("/",[webController::class,'index'])
 ->name('web.index');
 
 Route::get("/about",[webController::class,'about'])
@@ -107,3 +116,75 @@ Route::get("/team",[webController::class,'team'])
 
 Route::get('news/{id?}',[webController::class,'news'])
 ->name('web.news');
+
+
+
+
+
+
+
+Route::prefix('page1')->name('page1')->group(function(){
+
+    Route::get('/',[page1controller::class,'index'])->name('index');
+
+     Route::get('/about',[page1controller::class,'about'])->name('about');
+
+     Route::get('/contact',[page1controller::class,'contact'])->name('contact');
+
+     Route::get('/post',[page1controller::class,'post'])->name('post');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::prefix('cv')->name('cv.')->group(function(){
+
+    Route::get('/',[cvcontroller::class,"index"])->name('index');
+
+    Route::get('/experiens',[cvcontroller::class,"experiens"])->name('experiens');
+
+    Route::get('/education',[cvcontroller::class,"education"])->name('education');
+
+    Route::get('/skills',[cvcontroller::class,"skills"])->name('skills');
+
+    Route::get('/interests',[cvcontroller::class,"interests"])->name('interests');
+
+    Route::get('/awards',[cvcontroller::class,"awards"])->name('awards');
+});
+
+Route::get('form1',[form1controller::class,'form1'])->name('form1');
+Route::post('form1',[form1controller::class,'form1_data'])->name('form1_data');
+
+
+
+
+Route::get('form2',[form1controller::class,'form2'])->name('form2');
+Route::post('form2',[form1controller::class,'form2_data'])->name('form2_data');
+
+
+
+
+Route::get('form3',[form1controller::class,'form3'])->name('form3');
+Route::post('form3',[form1controller::class,'form3_data'])->name('form3_data');
+
+
+Route::get('posts',[postscontroller::class,'index'])->name('posts.index');
+
+
+Route::get('categoties',[catcontroller::class,'index'])->name('categoties.index');
+
+
+
+Route::get('posts/create',[postscontroller::class,'create'])->name('posts.create');
+Route::post('posts/srote',[postscontroller::class,'store'])->name('posts.store');
+
